@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade" version="3">
+	<name>Phoca Cart Brands</name>
+	<author>Jan Pavelka (www.phoca.cz)</author>
+	<creationDate>17/05/2018</creationDate>
+	<authorEmail></authorEmail>
+	<authorUrl>www.phoca.cz</authorUrl>
+	<copyright>Jan Pavelka</copyright>
+	<license>GNU/GPL</license>
+	<version>3.1.0</version>
+	<description>MOD_PHOCACART_BRANDS_DESCRIPTION</description>
+
+	<files>
+		<folder>language</folder>
+		<folder>tmpl</folder>
+		<filename module="mod_phocacart_brands">mod_phocacart_brands.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.mod_phocacart_brands.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_phocacart_brands.sys.ini</language>
+	</languages>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/administrator/components/com_phocacart/models/fields">
+				
+				<field name="brands_ordering" type="list" default="1" label="MOD_PHOCACART_BRANDS_FIELD_BRANDS_ORDERING_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_BRANDS_ORDERING_DESC">
+	<option value="1">MOD_PHOCACART_BRANDS_ORDERING_ASC</option>
+	<option value="2">MOD_PHOCACART_BRANDS_ORDERING_DESC</option>
+	<option value="3">MOD_PHOCACART_BRANDS_TITLE_ASC</option>
+	<option value="4">MOD_PHOCACART_BRANDS_TITLE_DESC</option>
+	<option value="5">MOD_PHOCACART_BRANDS_DATE_ASC</option>
+	<option value="6">MOD_PHOCACART_BRANDS_DATE_DESC</option>
+</field>
+
+<field name="slides_per_view" default="5" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_DESC" />
+
+<field name="display_navigation" type="list" default="1" label="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_NAVIGATION_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_NAVIGATION_DESC">
+	<option value="1">MOD_PHOCACART_BRANDS_YES</option>
+	<option value="0">MOD_PHOCACART_BRANDS_NO</option>
+</field>
+<field name="navigation_top" default="0" size="10" type="text" label="MOD_PHOCACART_BRANDS_NAVIGATION_INCREASE_TOP_POSITION_LABEL" description="MOD_PHOCACART_BRANDS_NAVIGATION_INCREASE_TOP_POSITION_DESC" />
+	
+<field name="display_pagination" type="list" default="1" label="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_PAGINATION_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_NAVIGATION_LABEL">
+	<option value="1">MOD_PHOCACART_BRANDS_YES</option>
+	<option value="0">MOD_PHOCACART_BRANDS_NO</option>
+</field>
+
+<field name="autoplay_delay" default="0" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_AUTOPLAY_DELAY_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_AUTOPLAY_DELAY_DESC" />
+
+<field name="moduleclass_sfx" type="textarea" rows="3" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />		
+			</fieldset>	
+		</fields>
+	</config>
+</extension>

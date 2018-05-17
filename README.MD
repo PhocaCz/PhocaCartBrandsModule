@@ -1,0 +1,1 @@
+Phoca Cart Brands Module is Joomla! CMS extension. Module which displays list of manufacturers (brands) in module position.
