@@ -1,0 +1,19 @@
+{
+	"author": "Jan Pavelka (www.phoca.cz)",
+	"authorUrl": "https://www.phoca.cz",
+	"copyright": "Jan Pavelka",
+	"license": "GNU/GPL",
+	"projectName": "PhocaCartBrandsModule",
+	"extensionName": "Phoca Cart Brands Module",
+	"projectInitials" : "PC",				  
+	"description": "Phoca Cart Brands Module - a Joomla! module which displays list of manufacturers (brands) in module position.",
+	"projectUrl": "https://www.phoca.cz/phoca-cart-brands-module",
+	"projectDocumentationUrl": "https://www.phoca.cz/documentation/category/132-phoca-cart-brands-module",
+	"projectMainComponent": "Phoca Cart",
+	"projectMainComponentInfoUrl": "https://www.phoca.cz/project/phocacart-joomla-ecommerce",
+	"projectDemo" : {
+		"Joomla! - Phoca Cart Demo": "https://www.phoca.cz/phocacartdemo/",
+		"Joomla! - Phoca Cart - Phoca Premiere Template Demo": "https://www.phoca.cz/phocacartdemo/premiere/"
+	},
+	"projectColor": "#129ed9"
+}

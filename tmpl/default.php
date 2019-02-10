@@ -12,14 +12,29 @@ echo '<div class="ph-brands-module-box'.$moduleclass_sfx .'">';
 
 echo '<div class="swiper-container ph-mod-brands-swiper-container">
     <div class="swiper-wrapper ph-mod-brands-swiper-wrapper">';
+	
+
+$linkI = PhocacartRoute::getItemsRoute();
+
 if (!empty($brands)) {
 	foreach ($brands as $k => $v) {
+		$link = $linkI . PhocacartRoute::getItemsRouteSuffix('manufacturer', $v->id, $v->alias);
 		
 		echo '<div class="swiper-slide ph-mod-brands-swiper-slide">';
 		if ($v->image != '') {
-			echo '<div class="ph-brand-name"><img src="'.JURI::base(true).'/' . $v->image.'" alt="'.htmlspecialchars($v->title).'" /></div>';
+			
+			echo '<div class="ph-brand-name">';
+			echo $p['display_link'] == 1 ? '<a href="'.$link.'">' : '';
+			echo '<img src="'.JURI::base(true).'/' . $v->image.'" alt="'.htmlspecialchars($v->title).'" />';
+			echo $p['display_link'] == 1 ? '</a>' : '';
+			echo '</div>';
+			
 		} else {
-			echo '<div class="ph-brand-name">'.$v->title.'</div>';
+			echo '<div class="ph-brand-name">';
+			echo $p['display_link'] == 1 ? '<a href="'.$link.'">' : '';
+			echo $v->title;
+			echo $p['display_link'] == 1 ? '</a>' : '';
+			echo '</div>';
 		}
 		echo '</div>';
 	}

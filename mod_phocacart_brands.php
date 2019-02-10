@@ -29,11 +29,22 @@ $media->loadSwiper();
 $p['brands_ordering']		= $params->get( 'brands_ordering', 1 );
 
 $p['slides_per_view']		= $params->get( 'slides_per_view', 5 );
+$p['transition_speed']		= $params->get( 'transition_speed', 1500 );
 $p['display_pagination']	= $params->get( 'display_pagination', 1 );
 $p['display_navigation']	= $params->get( 'display_navigation', 1 );
 $p['autoplay_delay']		= $params->get( 'autoplay_delay', 0 );
 $p['navigation_top']		= $params->get( 'navigation_top', 0 );
+$p['display_link']			= $params->get( 'display_link', 1 );
+$p['load_swiper_library']	= $params->get( 'load_swiper_library', 1 );
 $moduleclass_sfx 			= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
+
+$p['slides_per_view_576']		= $params->get( 'slides_per_view_576', 1 );
+$p['slides_per_view_768']		= $params->get( 'slides_per_view_768', 2 );
+$p['slides_per_view_992']		= $params->get( 'slides_per_view_992', 4 );
+
+if ($p['load_swiper_library'] == 1) {
+	$media->loadSwiper();	
+}
 
 $i	= 'ph-mod-brands';
 $k	= str_replace('-', '', $i);
@@ -44,8 +55,9 @@ $pg	= '.'.$i.'-swiper-pagination';
 $p['navigation_top'] = $p['navigation_top'];
 $mt	= 22 + ($p['display_pagination'] == 1 ? 15 : 0) + (int)$p['navigation_top'];// Minus Margin Top for arrows (22 is half of height of the arrow)
 $s   = array();
-$s[] = 'jQuery(document).ready(function(){';
-
+//$s[] = 'jQuery(document).ready(function(){';
+$s[] = ' ';
+$s[] = 'jQuery(window).load(function(){';
 $s[] = '   jQuery("'.$c.'").each(function( i ) {';
 
 $s[] = '      var swiper = new Swiper(jQuery("'.$c.'")[i], {';
@@ -57,8 +69,9 @@ if ($p['autoplay_delay'] > 0) {
 	$s[] = '           },';
 }
 
+$s[] = '         speed: '.(int)$p['transition_speed'].',';
 $s[] = '         spaceBetween: 30,';
-$s[] = '         autoHeight: true,';
+$s[] = '         autoHeight: false,';
 $s[] = '         freeMode: true,';
 
 if ($p['display_navigation'] == 1) {
@@ -75,6 +88,38 @@ if ($p['display_pagination'] == 1) {
 	$s[] = '         },';
 }
 
+if ((int)$p['slides_per_view_576'] > 0 || (int)$p['slides_per_view_768'] > 0 || (int)$p['slides_per_view_992'] > 0) {
+	
+	$comma = 0;
+	$s[] = '		breakpoints: {';
+	
+	if ((int)$p['slides_per_view_576'] > 0) {
+		$s[] = '			576: {';
+		$s[] = '				slidesPerView: '.(int)$p['slides_per_view_576'].',';
+		$s[] = '				spaceBetween: 10';
+		$s[] = '			}';
+		$comma = 1;
+    }
+	if ((int)$p['slides_per_view_768'] > 0) {
+		if ($comma) { $s[] = '			,';}
+		$s[] = '			768: {';
+		$s[] = '				slidesPerView: '.(int)$p['slides_per_view_768'].',';
+		$s[] = '				spaceBetween: 15';
+		$s[] = '			}';
+		$comma = 1;
+    }
+	if ((int)$p['slides_per_view_992'] > 0) {
+		if ($comma) { $s[] = '			,';}
+		$s[] = '			992: {';
+		$s[] = '				slidesPerView: '.(int)$p['slides_per_view_992'].',';
+		$s[] = '				spaceBetween: 20';
+		$s[] = '			}';
+		//$comma = 1;
+    }
+	
+	$s[] = '		}';	
+}
+
 $s[] = '      });';
 $s[] = '   });';// each
 
@@ -86,7 +131,7 @@ if ($p['display_navigation'] == 1) {
 }
 
 $s[] = '})';
-
+$s[] = ' ';
 $document->addScriptDeclaration(implode("\n", $s));
 
 
