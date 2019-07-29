@@ -6,7 +6,7 @@
  * @copyright Copyright (C) Jan Pavelka www.phoca.cz
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
- 
+
 defined('_JEXEC') or die;// no direct access
 
 if (!JComponentHelper::isEnabled('com_phocacart', true)) {
@@ -17,17 +17,13 @@ if (!JComponentHelper::isEnabled('com_phocacart', true)) {
 
 JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
 
-$lang = JFactory::getLanguage();
+$lang 		= JFactory::getLanguage();
 //$lang->load('com_phocacart.sys');
 $lang->load('com_phocacart');
+$document 	= JFactory::getDocument();
 
-$document = JFactory::getDocument();
-$media = new PhocacartRenderMedia();
-$media->loadSwiper();
-
-
+$p 							= array();
 $p['brands_ordering']		= $params->get( 'brands_ordering', 1 );
-
 $p['slides_per_view']		= $params->get( 'slides_per_view', 5 );
 $p['transition_speed']		= $params->get( 'transition_speed', 1500 );
 $p['display_pagination']	= $params->get( 'display_pagination', 1 );
@@ -36,15 +32,21 @@ $p['autoplay_delay']		= $params->get( 'autoplay_delay', 0 );
 $p['navigation_top']		= $params->get( 'navigation_top', 0 );
 $p['display_link']			= $params->get( 'display_link', 1 );
 $p['load_swiper_library']	= $params->get( 'load_swiper_library', 1 );
+$p['slides_per_view_576']	= $params->get( 'slides_per_view_576', 1 );
+$p['slides_per_view_768']	= $params->get( 'slides_per_view_768', 2 );
+$p['slides_per_view_992']	= $params->get( 'slides_per_view_992', 4 );
+
 $moduleclass_sfx 			= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
 
-$p['slides_per_view_576']		= $params->get( 'slides_per_view_576', 1 );
-$p['slides_per_view_768']		= $params->get( 'slides_per_view_768', 2 );
-$p['slides_per_view_992']		= $params->get( 'slides_per_view_992', 4 );
-
+$media = new PhocacartRenderMedia();
+$media->loadBase();
+$media->loadBootstrap();
 if ($p['load_swiper_library'] == 1) {
-	$media->loadSwiper();	
+	$media->loadSwiper();
 }
+$media->loadSpec();
+$s = PhocacartRenderStyle::getStyles();
+
 
 $i	= 'ph-mod-brands';
 $k	= str_replace('-', '', $i);
@@ -52,87 +54,86 @@ $c	= '.'.$i.'-swiper-container';
 $bn	= '.'.$i.'-swiper-button-next';
 $bp	= '.'.$i.'-swiper-button-prev';
 $pg	= '.'.$i.'-swiper-pagination';
-$p['navigation_top'] = $p['navigation_top'];
 $mt	= 22 + ($p['display_pagination'] == 1 ? 15 : 0) + (int)$p['navigation_top'];// Minus Margin Top for arrows (22 is half of height of the arrow)
-$s   = array();
-//$s[] = 'jQuery(document).ready(function(){';
-$s[] = ' ';
-$s[] = 'jQuery(window).load(function(){';
-$s[] = '   jQuery("'.$c.'").each(function( i ) {';
+$sa   = array();
+//$sa[] = 'jQuery(document).ready(function(){';
+$sa[] = ' ';
+$sa[] = 'jQuery(window).load(function(){';
+$sa[] = '   jQuery("'.$c.'").each(function( i ) {';
 
-$s[] = '      var swiper = new Swiper(jQuery("'.$c.'")[i], {';
-$s[] = '         slidesPerView: '.(int)$p['slides_per_view'].',';
+$sa[] = '      var swiper = new Swiper(jQuery("'.$c.'")[i], {';
+$sa[] = '         slidesPerView: '.(int)$p['slides_per_view'].',';
 
 if ($p['autoplay_delay'] > 0) {
-	$s[] = '         autoplay: {';
-	$s[] = '             delay: '.(int)$p['autoplay_delay'].',';
-	$s[] = '           },';
+	$sa[] = '         autoplay: {';
+	$sa[] = '             delay: '.(int)$p['autoplay_delay'].',';
+	$sa[] = '           },';
 }
 
-$s[] = '         speed: '.(int)$p['transition_speed'].',';
-$s[] = '         spaceBetween: 30,';
-$s[] = '         autoHeight: false,';
-$s[] = '         freeMode: true,';
+$sa[] = '         speed: '.(int)$p['transition_speed'].',';
+$sa[] = '         spaceBetween: 30,';
+$sa[] = '         autoHeight: false,';
+$sa[] = '         freeMode: true,';
 
 if ($p['display_navigation'] == 1) {
-	$s[] = '         navigation: {';
-	$s[] = '            nextEl: jQuery(".swiper-button-next'.$bn.'")[i],';
-	$s[] = '            prevEl: jQuery(".swiper-button-prev'.$bp.'")[i],';
-	$s[] = '         },';
+	$sa[] = '         navigation: {';
+	$sa[] = '            nextEl: jQuery(".swiper-button-next'.$bn.'")[i],';
+	$sa[] = '            prevEl: jQuery(".swiper-button-prev'.$bp.'")[i],';
+	$sa[] = '         },';
 }
 
 if ($p['display_pagination'] == 1) {
-	$s[] = '         pagination: {';
-	$s[] = '            el: "'.$pg.'",';
-	$s[] = '            clickable: true,';
-	$s[] = '         },';
+	$sa[] = '         pagination: {';
+	$sa[] = '            el: "'.$pg.'",';
+	$sa[] = '            clickable: true,';
+	$sa[] = '         },';
 }
 
 if ((int)$p['slides_per_view_576'] > 0 || (int)$p['slides_per_view_768'] > 0 || (int)$p['slides_per_view_992'] > 0) {
-	
+
 	$comma = 0;
-	$s[] = '		breakpoints: {';
-	
+	$sa[] = '		breakpoints: {';
+
 	if ((int)$p['slides_per_view_576'] > 0) {
-		$s[] = '			576: {';
-		$s[] = '				slidesPerView: '.(int)$p['slides_per_view_576'].',';
-		$s[] = '				spaceBetween: 10';
-		$s[] = '			}';
+		$sa[] = '			576: {';
+		$sa[] = '				slidesPerView: '.(int)$p['slides_per_view_576'].',';
+		$sa[] = '				spaceBetween: 10';
+		$sa[] = '			}';
 		$comma = 1;
     }
 	if ((int)$p['slides_per_view_768'] > 0) {
-		if ($comma) { $s[] = '			,';}
-		$s[] = '			768: {';
-		$s[] = '				slidesPerView: '.(int)$p['slides_per_view_768'].',';
-		$s[] = '				spaceBetween: 15';
-		$s[] = '			}';
+		if ($comma) { $sa[] = '			,';}
+		$sa[] = '			768: {';
+		$sa[] = '				slidesPerView: '.(int)$p['slides_per_view_768'].',';
+		$sa[] = '				spaceBetween: 15';
+		$sa[] = '			}';
 		$comma = 1;
     }
 	if ((int)$p['slides_per_view_992'] > 0) {
-		if ($comma) { $s[] = '			,';}
-		$s[] = '			992: {';
-		$s[] = '				slidesPerView: '.(int)$p['slides_per_view_992'].',';
-		$s[] = '				spaceBetween: 20';
-		$s[] = '			}';
+		if ($comma) { $sa[] = '			,';}
+		$sa[] = '			992: {';
+		$sa[] = '				slidesPerView: '.(int)$p['slides_per_view_992'].',';
+		$sa[] = '				spaceBetween: 20';
+		$sa[] = '			}';
 		//$comma = 1;
     }
-	
-	$s[] = '		}';	
+
+	$sa[] = '		}';
 }
 
-$s[] = '      });';
-$s[] = '   });';// each
+$sa[] = '      });';
+$sa[] = '   });';// each
 
 if ($p['display_navigation'] == 1) {
-	$s[] = '   var height'.$k.' = jQuery("'.$c.'").height();';
-	$s[] = '   var height'.$k.'h = (height'.$k.' / 2) + '.$mt.';';
-	$s[] = '   jQuery("'.$bn.'").css("margin-top", "-"+height'.$k.'h+"px");';
-	$s[] = '   jQuery("'.$bp.'").css("margin-top", "-"+height'.$k.'h+"px");';
+	$sa[] = '   var height'.$k.' = jQuery("'.$c.'").height();';
+	$sa[] = '   var height'.$k.'h = (height'.$k.' / 2) + '.$mt.';';
+	$sa[] = '   jQuery("'.$bn.'").css("margin-top", "-"+height'.$k.'h+"px");';
+	$sa[] = '   jQuery("'.$bp.'").css("margin-top", "-"+height'.$k.'h+"px");';
 }
 
-$s[] = '})';
-$s[] = ' ';
-$document->addScriptDeclaration(implode("\n", $s));
+$sa[] = '})';
+$sa[] = ' ';
+$document->addScriptDeclaration(implode("\n", $sa));
 
 
 
