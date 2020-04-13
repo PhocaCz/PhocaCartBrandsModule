@@ -12,23 +12,26 @@ echo '<div class="ph-brands-module-box'.$moduleclass_sfx .'">';
 
 echo '<div class="swiper-container ph-mod-brands-swiper-container">
     <div class="swiper-wrapper ph-mod-brands-swiper-wrapper">';
-	
+
 
 $linkI = PhocacartRoute::getItemsRoute();
+$pC 						= PhocacartUtils::getComponentParameters();
+$manufacturer_alias			= $pC->get( 'manufacturer_alias', 'manufacturer');
+$manufacturer_alias			= $manufacturer_alias != '' ? trim(PhocacartText::filterValue($manufacturer_alias, 'alphanumeric'))  : 'manufacturer';
 
 if (!empty($brands)) {
 	foreach ($brands as $k => $v) {
 		$link = $linkI . PhocacartRoute::getItemsRouteSuffix('manufacturer', $v->id, $v->alias);
-		
+
 		echo '<div class="swiper-slide ph-mod-brands-swiper-slide">';
 		if ($v->image != '') {
-			
+
 			echo '<div class="ph-brand-name">';
 			echo $p['display_link'] == 1 ? '<a href="'.$link.'">' : '';
 			echo '<img src="'.JURI::base(true).'/' . $v->image.'" alt="'.htmlspecialchars($v->title).'" />';
 			echo $p['display_link'] == 1 ? '</a>' : '';
 			echo '</div>';
-			
+
 		} else {
 			echo '<div class="ph-brand-name">';
 			echo $p['display_link'] == 1 ? '<a href="'.$link.'">' : '';

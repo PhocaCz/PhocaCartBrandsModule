@@ -38,7 +38,7 @@ $p['slides_per_view_992']	= $params->get( 'slides_per_view_992', 4 );
 
 $moduleclass_sfx 			= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
 
-$media = new PhocacartRenderMedia();
+$media = PhocacartRenderMedia::getInstance('main');
 $media->loadBase();
 $media->loadBootstrap();
 if ($p['load_swiper_library'] == 1) {
@@ -58,7 +58,8 @@ $mt	= 22 + ($p['display_pagination'] == 1 ? 15 : 0) + (int)$p['navigation_top'];
 $sa   = array();
 //$sa[] = 'jQuery(document).ready(function(){';
 $sa[] = ' ';
-$sa[] = 'jQuery(window).load(function(){';
+//$sa[] = 'jQuery(window).load(function(){';
+$sa[] = 'jQuery(window).on(\'load\', function(){';
 $sa[] = '   jQuery("'.$c.'").each(function( i ) {';
 
 $sa[] = '      var swiper = new Swiper(jQuery("'.$c.'")[i], {';
