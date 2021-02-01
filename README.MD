@@ -2,7 +2,7 @@
 
 
 
-![Phoca Cart Brands Module](https://github.com/PhocaCz/PhocaCartBrandsModule/blob/master/mod_phocacart_brands.png)
+![Phoca Cart Brands Module](https://github.com/PhocaCz/PhocaCartBrandsModule/blob/master/mod_phocacart_brands.png?raw=true)
 
 # Phoca Cart Brands Module
 
@@ -56,7 +56,7 @@ Phoca Cart Brands Module - a Joomla! module which displays list of manufacturers
 
 ## Version
 
-3.5.4
+3.5.5
 
 
 

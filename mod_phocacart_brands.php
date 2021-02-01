@@ -150,5 +150,5 @@ if (!empty($hide_categories)) {
 }
 */
 $brands = PhocacartManufacturer::getAllManufacturers($p['brands_ordering']);
-require(JModuleHelper::getLayoutPath('mod_phocacart_brands'));
+require(JModuleHelper::getLayoutPath('mod_phocacart_brands', $params->get('layout', 'default')));
 ?>
