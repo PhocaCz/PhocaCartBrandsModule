@@ -8,10 +8,11 @@
  */
 defined('_JEXEC') or die;
 
-echo '<div class="ph-brands-module-box'.$moduleclass_sfx .'">';
+echo '<div class="phBrandsModuleBox ph-brands-module-box'.$moduleclass_sfx .'">';
 
-echo '<div class="swiper-container ph-mod-brands-swiper-container">
-    <div class="swiper-wrapper ph-mod-brands-swiper-wrapper">';
+echo '<div class="swiper-container '.$uniqueId.'">';
+echo '<div class="swiper">';
+echo '<div class="swiper-wrapper">';//ph-mod-brands-swiper-wrapper;
 
 
 $linkI = PhocacartRoute::getItemsRoute();
@@ -21,9 +22,9 @@ $manufacturer_alias			= $manufacturer_alias != '' ? trim(PhocacartText::filterVa
 
 if (!empty($brands)) {
 	foreach ($brands as $k => $v) {
-		$link = $linkI . PhocacartRoute::getItemsRouteSuffix('manufacturer', $v->id, $v->alias);
+		$link = $linkI . PhocacartRoute::getItemsRouteSuffix($manufacturer_alias, $v->id, $v->alias);
 
-		echo '<div class="swiper-slide ph-mod-brands-swiper-slide">';
+		echo '<div class="swiper-slide">';//ph-mod-brands-swiper-slide
 		if ($v->image != '') {
 
 			echo '<div class="ph-brand-name">';
@@ -51,16 +52,18 @@ echo '</div>';// end wrapper
 //echo '<div class="swiper-button-prev ph-mod-brands-swiper-button-prev"></div>';
 // PAGINATION
 if ($p['display_pagination'] == 1) {
-	echo '<div class="swiper-pagination ph-mod-brands-swiper-pagination"></div>';
+	echo '<div class="swiper-pagination"></div>';//ph-mod-brands-swiper-pagination
 }
-echo '</div>';// end container
 
 // ARROWS MOVED OUTSIDE CONTAINER
 if ($p['display_navigation'] == 1) {
-	echo '<div class="swiper-button-next ph-mod-brands-swiper-button-next"></div>';
-	echo '<div class="swiper-button-prev ph-mod-brands-swiper-button-prev"></div>';
-	echo '<div class="clear-fix"></div>';
+	echo '<div class="swiper-button-next"></div>';//ph-mod-brands-swiper-button-next
+	echo '<div class="swiper-button-prev"></div>';//ph-mod-brands-swiper-button-prev
+	//echo '<div class="clear-fix"></div>';
 }
+echo '</div>';// end swiper
+echo '</div>';// end container
+
 echo '</div>';// end module box
 ?>
 

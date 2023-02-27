@@ -2,12 +2,12 @@
 <extension type="module" client="site" method="upgrade" version="4.0">
 	<name>mod_phocacart_brands</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>21/02/2022</creationDate>
+	<creationDate>28/02/2023</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>4.0.0</version>
+	<version>4.0.6Beta</version>
 	<description>MOD_PHOCACART_BRANDS_DESCRIPTION</description>
 	<projectName>PhocaCartBrandsModule</projectName>
 
@@ -25,7 +25,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic" addfieldpath="/administrator/components/com_phocacart/models/fields">
-				
+
 				<field name="brands_ordering" type="list" default="1" label="MOD_PHOCACART_BRANDS_FIELD_BRANDS_ORDERING_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_BRANDS_ORDERING_DESC">
 	<option value="1">MOD_PHOCACART_BRANDS_ORDERING_ASC</option>
 	<option value="2">MOD_PHOCACART_BRANDS_ORDERING_DESC</option>
@@ -35,18 +35,18 @@
 	<option value="6">MOD_PHOCACART_BRANDS_DATE_DESC</option>
 </field>
 
-<field name="slides_per_view" default="5" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_DESC"/>
+<field name="slides_per_view" default="1" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_DESC"/>
 
-<field name="slides_per_view_576" default="1" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_576_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_576_DESC"/>
-<field name="slides_per_view_768" default="2" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_768_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_768_DESC"/>
-<field name="slides_per_view_992" default="4" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_992_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_992_DESC"/>
+<field name="slides_per_view_576" default="2" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_576_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_576_DESC"/>
+<field name="slides_per_view_768" default="4" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_768_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_768_DESC"/>
+<field name="slides_per_view_992" default="5" size="10" type="text" label="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_992_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_SLIDES_PER_VIEW_992_DESC"/>
 
 <field name="display_navigation" type="list" default="1" label="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_NAVIGATION_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_NAVIGATION_DESC">
 	<option value="1">MOD_PHOCACART_BRANDS_YES</option>
 	<option value="0">MOD_PHOCACART_BRANDS_NO</option>
 </field>
 <field name="navigation_top" default="0" size="10" type="text" label="MOD_PHOCACART_BRANDS_NAVIGATION_INCREASE_TOP_POSITION_LABEL" description="MOD_PHOCACART_BRANDS_NAVIGATION_INCREASE_TOP_POSITION_DESC"/>
-	
+
 <field name="display_pagination" type="list" default="1" label="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_PAGINATION_LABEL" description="MOD_PHOCACART_BRANDS_FIELD_DISPLAY_NAVIGATION_LABEL">
 	<option value="1">MOD_PHOCACART_BRANDS_YES</option>
 	<option value="0">MOD_PHOCACART_BRANDS_NO</option>
@@ -65,9 +65,9 @@
 	<option value="1">MOD_PHOCACART_BRANDS_YES</option>
 	<option value="0">MOD_PHOCACART_BRANDS_NO</option>
 </field>
-	
-			</fieldset>	
-			
+
+			</fieldset>
+
 			<fieldset name="advanced">
 				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
 				<field name="moduleclass_sfx" type="textarea" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" rows="3"/>
