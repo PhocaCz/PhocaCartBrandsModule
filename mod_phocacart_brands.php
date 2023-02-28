@@ -7,20 +7,27 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
 
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ModuleHelper;
+
 defined('_JEXEC') or die;// no direct access
 
-if (!JComponentHelper::isEnabled('com_phocacart', true)) {
-	$app = JFactory::getApplication();
+
+$app = Factory::getApplication();
+
+if (!ComponentHelper::isEnabled('com_phocacart', true)) {
 	$app->enqueueMessage(JText::_('Phoca Cart Error'), JText::_('Phoca Cart is not installed on your system'), 'error');
 	return;
 }
 
 JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
 
-$lang 		= JFactory::getLanguage();
+$lang 		= Factory::getLanguage();
 //$lang->load('com_phocacart.sys');
 $lang->load('com_phocacart');
-$document 	= JFactory::getDocument();
+$document 	= Factory::getDocument();
+$wa                         = $document->getWebAssetManager();
 
 $p 							= array();
 $p['brands_ordering']		= $params->get( 'brands_ordering', 1 );
@@ -139,7 +146,8 @@ if ($p['display_navigation'] == 1) {
 
 $sa[] = '})';
 $sa[] = ' ';
-$document->addScriptDeclaration(implode("\n", $sa));
+//$document->addScriptDeclaration(implode("\n", $sa));
+$wa->addInlineScript(implode("\n", $sa), ['version' => 'auto'], ['type' => 'module']);//, ['defer' => true]
 
 
 
@@ -155,5 +163,5 @@ if (!empty($hide_categories)) {
 }
 */
 $brands = PhocacartManufacturer::getAllManufacturers($p['brands_ordering']);
-require(JModuleHelper::getLayoutPath('mod_phocacart_brands', $params->get('layout', 'default')));
+require(ModuleHelper::getLayoutPath('mod_phocacart_brands', $params->get('layout', 'default')));
 ?>
