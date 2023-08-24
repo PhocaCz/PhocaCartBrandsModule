@@ -60,7 +60,7 @@ Phoca Cart Brands Module - a Joomla! module which displays list of manufacturers
 
 ## Version (Joomla! 4.x)
 
-4.0.7
+4.0.8
 
 
 

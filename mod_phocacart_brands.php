@@ -43,6 +43,7 @@ $p['slides_per_view_576']	= $params->get( 'slides_per_view_576', 1 );
 $p['slides_per_view_768']	= $params->get( 'slides_per_view_768', 2 );
 $p['slides_per_view_992']	= $params->get( 'slides_per_view_992', 4 );
 
+
 $moduleclass_sfx 			= htmlspecialchars((string)$params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8');
 
 $media = PhocacartRenderMedia::getInstance('main');

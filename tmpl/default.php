@@ -20,6 +20,13 @@ $pC 						= PhocacartUtils::getComponentParameters();
 $manufacturer_alias			= $pC->get( 'manufacturer_alias', 'manufacturer');
 $manufacturer_alias			= $manufacturer_alias != '' ? trim(PhocacartText::filterValue($manufacturer_alias, 'alphanumeric'))  : 'manufacturer';
 
+$lazy_load_category_items	= $pC->get( 'lazy_load_category_items', 0 );
+// Native lazy load
+$attributeLazyLoad = '';
+if ($lazy_load_category_items == 2) {
+    $attributeLazyLoad = isset($s['a']['lazyload']) && $s['a']['lazyload'] != '' ? $s['a']['lazyload'] : '';
+}
+
 if (!empty($brands)) {
 	foreach ($brands as $k => $v) {
 		$link = $linkI . PhocacartRoute::getItemsRouteSuffix($manufacturer_alias, $v->id, $v->alias);
@@ -29,7 +36,7 @@ if (!empty($brands)) {
 
 			echo '<div class="ph-brand-name">';
 			echo $p['display_link'] == 1 ? '<a href="'.$link.'">' : '';
-			echo '<img src="'.JURI::base(true).'/' . $v->image.'" alt="'.htmlspecialchars($v->title).'" />';
+			echo '<img src="'.JURI::base(true).'/' . $v->image.'" alt="'.htmlspecialchars($v->title).'" '.$attributeLazyLoad.'/>';
 			echo $p['display_link'] == 1 ? '</a>' : '';
 			echo '</div>';
 
