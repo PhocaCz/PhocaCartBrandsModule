@@ -6,6 +6,9 @@
  * @copyright Copyright (C) Jan Pavelka www.phoca.cz
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
+
+use Joomla\CMS\Uri\Uri;
+
 defined('_JEXEC') or die;
 
 echo '<div class="phBrandsModuleBox ph-brands-module-box'.$moduleclass_sfx .'">';
@@ -36,7 +39,7 @@ if (!empty($brands)) {
 
 			echo '<div class="ph-brand-name">';
 			echo $p['display_link'] == 1 ? '<a href="'.$link.'">' : '';
-			echo '<img src="'.JURI::base(true).'/' . $v->image.'" alt="'.htmlspecialchars($v->title).'" '.$attributeLazyLoad.'/>';
+			echo '<img src="'.Uri::base(true).'/' . $v->image.'" alt="'.htmlspecialchars($v->title).'" '.$attributeLazyLoad.'/>';
 			echo $p['display_link'] == 1 ? '</a>' : '';
 			echo '</div>';
 

@@ -7,17 +7,17 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
 
+defined('_JEXEC') or die;// no direct access
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Helper\ModuleHelper;
-
-defined('_JEXEC') or die;// no direct access
 
 
 $app = Factory::getApplication();
 
 if (!ComponentHelper::isEnabled('com_phocacart', true)) {
-	$app->enqueueMessage(JText::_('Phoca Cart Error'), JText::_('Phoca Cart is not installed on your system'), 'error');
+	$app->enqueueMessage(Text::_('Phoca Cart Error'), Text::_('Phoca Cart is not installed on your system'), 'error');
 	return;
 }
 
