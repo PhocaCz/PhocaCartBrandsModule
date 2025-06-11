@@ -39,4 +39,24 @@
 		<targetplatform name="joomla" version="4\.*"/>
 		<client>site</client>
 	</update>
+	<update>
+		<name><![CDATA[ Phoca Cart Brands Module ]]></name>
+		<description><![CDATA[ Phoca Cart Brands Module - a Joomla! module which displays list of manufacturers (brands) in module position. ]]></description>
+		<element>mod_phocacart_brands</element>
+		<type>module</type>
+		<version>5.1.1</version>
+		<infourl title="Phoca Cart Brands Module 5.1.1">https://www.phoca.cz/</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaCartBrandsModule/releases/download/5.1.1/mod_phocacart_brands_v5.1.1.zip</downloadurl>
+		</downloads>
+		<sha512>21a2b17f0f7a1a7cbd2da878e3109ff05d6b2b76399666dbbd95f78f0bd16e003cef4c6c37d9616c6da7530dc8ccfa61710af2b9e8fa1f2fb04332bfeaf9aad5</sha512>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
+		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="5\.*"/>
+		<client>site</client>
+	</update>
 </updates>
